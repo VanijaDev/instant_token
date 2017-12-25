@@ -6,6 +6,7 @@ import "./Ownable.sol";
 contract InstantToken is StandardToken, Ownable {
   string public name = "SkinCoin";
   string public symbol = "SKIN";
+  uint public decimals = 18;
 
 
   // Constructor
@@ -18,6 +19,7 @@ contract InstantToken is StandardToken, Ownable {
    *  Burn amount of tokens
    */
   function burn(uint _value) public onlyOwner returns (bool) {
+    balances[msg.sender] = balances[msg.sender].sub(_value);
     totalSupply = totalSupply.sub(_value);
 
     Transfer(msg.sender, 0x0, _value);
